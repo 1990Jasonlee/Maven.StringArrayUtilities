@@ -3,6 +3,7 @@ package com.zipcodewilmington;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by leon on 1/29/18.
@@ -59,19 +60,26 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        List<String> list = Arrays.asList(array);
-        Collections.reverse(list);
-        String[] reverse = list.toArray(array);
+//        List<String> list = Arrays.asList(array);
+//        Collections.reverse(list);
+//        String[] reverse = list.toArray(array);
+//        return reverse;
+        String[] reverse = new String[array.length];
+        for (int i = 0; i <= array.length/2 ; i++) {
+            reverse[i] =array[array.length - i - 1];
+            reverse[reverse.length - i - 1] = array[i];
+        }
         return reverse;
     }
-
+        // get middle point of string
+        // swap first and last word on each end, repeat towards to middle letter of string
 
         /**
          * @param array array of String objects
          * @return true if the order of the array is the same backwards and forwards
          */ // TODO
         public static boolean isPalindromic (String[]array){
-            return false;
+            return Arrays.equals(array, reverse(array));
         }
 
         /**
@@ -79,8 +87,25 @@ public class StringArrayUtils {
          * @return true if each letter in the alphabet has been used in the array
          */ // TODO
         public static boolean isPangramic (String[]array){
-            return false;
+            boolean isPangramic = false;
+            int count = 0;
+            String arr = Arrays.toString(array).toLowerCase();
+            String alpha = "abcdefghijklmnopqrstuvwxyz";
+            for (int i = 0; i < alpha.length(); i++) {
+                for (int j = 0; j < arr.length(); j++) {
+                    if (alpha.charAt(i) == arr.charAt(j)) {
+                        count++;
+                        break;
+                    }
+                }
+            }
+                if (count == 26){
+                    isPangramic = true;
+                }
+            return isPangramic;
         }
+
+
 
         /**
          * @param array array of String objects
@@ -88,7 +113,13 @@ public class StringArrayUtils {
          * @return number of occurrences the specified `value` has occurred
          */ // TODO
         public static int getNumberOfOccurrences (String[]array, String value){
-            return Integer.parseInt(null);
+            int occurance = 0;
+            for (int i = 0; i < array.length; i++){
+                if (array[i].equals(value)){
+                    occurance++;
+                }
+            }
+            return occurance;
         }
 
         /**

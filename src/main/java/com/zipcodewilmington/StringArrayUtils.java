@@ -132,26 +132,22 @@ public class StringArrayUtils {
          * @return array with identical contents excluding values of `value`
          */ // TODO
         public static String[] removeValue (String[]array, String valueToRemove){
-            return Arrays.stream(array)
-                    .filter(i -> !i.equals(valueToRemove))
-                    .toArray(String[]::new);
+            String[] arr;
+            int count = 0;
+            int newIndex= 0;
+            for (int i = 0; i < array.length; i++){
+                if(array[i].equals(valueToRemove)){
+                    count++;
+                }
+            }
+            arr = new String[array.length - count];
+            for (int i = 0; i < array.length; i++)
+            if (!array[i].equals(valueToRemove)) {
+                arr[newIndex] = array[i];
+                newIndex++;
         }
-//            String[] arr;
-//            int count = 0;
-//            int newIndex= 0;
-//            for (int i = 0; i < array.length; i++){
-//                if(array[i].equals(valueToRemove)){
-//                    count++;
-//                }
-//            }
-//            arr = new String[array.length - count];
-//            for (int i = 0; i < array.length; i++)
-//            if (!array[i].equals(valueToRemove)) {
-//                arr[newIndex] = array[i];
-//                newIndex++;
-//        }
-//            return arr;
-//    }
+            return arr;
+    }
 
 
         /**

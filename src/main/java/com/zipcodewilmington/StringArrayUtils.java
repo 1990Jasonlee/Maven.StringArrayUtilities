@@ -1,5 +1,8 @@
 package com.zipcodewilmington;
 
+import org.junit.Assert;
+
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -79,6 +82,7 @@ public class StringArrayUtils {
          * @return true if the order of the array is the same backwards and forwards
          */ // TODO
         public static boolean isPalindromic (String[]array){
+
             return Arrays.equals(array, reverse(array));
         }
 
@@ -128,26 +132,85 @@ public class StringArrayUtils {
          * @return array with identical contents excluding values of `value`
          */ // TODO
         public static String[] removeValue (String[]array, String valueToRemove){
-            return null;
+            return Arrays.stream(array)
+                    .filter(i -> !i.equals(valueToRemove))
+                    .toArray(String[]::new);
         }
+//            String[] arr;
+//            int count = 0;
+//            int newIndex= 0;
+//            for (int i = 0; i < array.length; i++){
+//                if(array[i].equals(valueToRemove)){
+//                    count++;
+//                }
+//            }
+//            arr = new String[array.length - count];
+//            for (int i = 0; i < array.length; i++)
+//            if (!array[i].equals(valueToRemove)) {
+//                arr[newIndex] = array[i];
+//                newIndex++;
+//        }
+//            return arr;
+//    }
+
 
         /**
          * @param array array of chars
          * @return array of Strings with consecutive duplicates removes
          */ // TODO
+
         public static String[] removeConsecutiveDuplicates (String[]array){
-            return null;
-        }
+            String[] arr;
+            int count = 0;
+            int newIndex= 0;
+            String duplicate = "";
+
+            for (int i = 0; i < array.length; i++){
+                if(!array[i].equals(duplicate)) {
+                    duplicate = array[i];
+                }
+                 else count++;
+                 // count number of consecutive duplicates
+                }
+
+            arr = new String[array.length - count];
+            for (int i = 0; i < array.length; i++)
+            if (!array[i].equals(duplicate)) {
+                arr[newIndex] = array[i];
+                duplicate = array[i];
+                newIndex++;
+        }       // new array with no duplicates
+            return arr;
+    }
+
 
         /**
          * @param array array of chars
          * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
          */ // TODO
+        //String[] array = {"a", "a", "a", "b", "c", "c", "a", "a", "d"};
+        //String[] expected = {"aaa", "b", "cc", "aa", "d"};
         public static String[] packConsecutiveDuplicates (String[]array){
-            return null;
+            String arr = ""; // aaa b c c aa d
+            int count = 0;
+            for (int i = 0; i < array.length-1; i++){
+                if (array[i] !=array[i+1]) {
+                    arr += array[i] + " ";
+                } else
+                { arr += array[i];
+                    }
+                //find duplicate and group
+                }
+            arr += array[array.length-1];
+            for (int i = 0; i < arr.length(); i++){
+                if (arr.charAt(i) == ' '){
+                    count++;
+                }
+            }
+            //find number of grouping
+            count++;
+            String[] newArray = arr.split(" ", count++);
+            return newArray;
         }
 
-
     }
-
-
